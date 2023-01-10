@@ -1,0 +1,135 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+   pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html lang='en' class=''>
+   <head>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	  <script src="https://kit.fontawesome.com/cf2ce8c5d6.js" crossorigin="anonymous"></script>
+      <script src ="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js></script>
+      <script src ="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css></script>
+      <link rel="stylesheet"  href="/css/login.css">
+      <title>Login</title>
+   </head>
+   <body>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6 mx-auto py-4 px-0">
+               <div class="card p-0">
+                  <div class="card-title text-center">
+                     <h5 class="mt-5">HEY, THERE</h5>
+                     <small class="para">Login to your cool account below.</small>
+                  </div>
+                  <form class="signup" name="login_form" id="login_form" action="" method="post">
+                     <div class="form-group"><input type="text" class="form-control" placeholder="Username" id="username" name="username"></div>
+                     <div class="form-group"><input type="password" class="form-control" placeholder="password" id="password" name = "password"></div>
+                     <input type="submit" id="login" name= "login" value ="Login" />
+                     <div class="row">
+                        <div class="col-6 col-sm-6">
+                           <a href="#">
+                              <p class="text-left pt-2 ml-1">Forgot password?</p>
+                           </a>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                           <a href="/register">
+                              <p class="text-right pt-2 mr-1">Sign Up Now</p>
+                           </a>
+                        </div>
+                     </div>
+                     <span class="text-center">Or</span> <span class="text-center pt-3">Login Using</span>
+                     <div class="row">
+                        <div class="d-flex mx-auto pt-1 pb-3"> <a href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i class="fab fa-twitter"></i></a> <a href="#"><i class="fab fa-linkedin"></i></a> </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+<!-- 
+      <form name="login_form" id="login_form" action="" method="post">
+         <div class="form-group col-lg-1"">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username">
+         </div>
+         <div class="form-group col-lg-1"">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name = "password"placeholder="Password">
+         </div>
+         <div>
+            <input type="submit" id="login" name= "login" value ="Login" />
+         </div>
+      </form>-->
+      <script>
+         /* $(document).ready(function () {
+         $("#login_frm").submit(function() {
+                  $.ajax({
+                      url: '/generateToken',
+                      type: 'POST',
+                      dataType: 'json',
+                      data: JSON.stringify({
+             username: $('#username').val(),
+             password: $('#password').val(),
+         }),
+                      success: function (data, textStatus, xhr) {
+                          console.log(data);
+                          console.log(data);
+                      },
+                      error: function (xhr, textStatus, errorThrown) {
+                          console.log('Error in Operation');
+                      }
+                  });
+              });
+          });*/
+         
+         // jQuery ajax form submit example, runs when form is submitted
+         $("#login_form").submit(function(e) {
+         e.preventDefault(); // prevent actual form submit
+         var form = $(this);
+         console.log(form.serialize());
+         var form_data = JSON.stringify(form.serialize()); 
+         console.log(form_data);
+         
+         
+         var data = form.serialize().split("&");
+         console.log(data);
+         var obj={};
+         for(var key in data)
+         {
+         console.log(data[key]);
+         obj[data[key].split("=")[0]] = data[key].split("=")[1];
+         }
+         
+         console.log(obj);
+         
+         
+         
+         var url = 'generateToken'; //get submit url [replace url here if desired]
+         var token;
+
+		 $.ajax({
+          type: "POST",
+          url: url,
+		  async : false,
+          data: obj, // serializes form input
+          success: function(data){
+			token = 'Bearer '+data.token;
+		 //console.log('Bearer '+data.token);	
+			  $.ajax({
+				type: "GET",
+			  url: 'welcome',
+			  async : false,
+			  headers: { 'Authorization': token }
+			  
+			 });		
+              
+          }
+         });
+		 
+		
+         }); 
+      </script>
+   </body>
+</html>

@@ -1,0 +1,46 @@
+/*dark mode*/
+.dark_body{
+	/* fallback for old browsers */
+  background: #c471f5;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(180deg, rgb(6, 2, 2) 32.4%, rgb(137, 30, 47) 98.8%);
+
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(180deg, rgb(6, 2, 2) 32.4%, rgb(137, 30, 47) 98.8%);
+	
+}
+
+/*light mode*/
+body{
+	/* fallback for old browsers */
+  background: #c471f5;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(180deg,rgb(245,245,245) 32.4%, rgb(255,235,205) 98.8%);
+
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(180deg, rgb(245,245,245) 32.4%, rgb(255,235,205) 98.8%);
+	
+}
+
+.paraghraph{
+	
+	font-size: 1.35em; /* 14px/16=0.875em */
+	
+	color: 	#F0FFF0;	
+	font-weight: bold;
+	
+}
+.carousel-item img {
+	 margin: auto;
+    border-radius: 50%;
+      
+}
+.carousel_size {
+  width: 75% !important;
+  height: 55vh;
+}
+
